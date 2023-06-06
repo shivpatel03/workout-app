@@ -15,3 +15,7 @@ code {
 .nav-header {
   text-decoration: none;
 }
+
+.error {
+  border: 1px solid red;
+}

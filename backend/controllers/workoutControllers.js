@@ -28,6 +28,27 @@ const getOneWorkout = async(req,res) => {
 // post workout
 const createWorkout = async(req,res) => {
     const {name, reps, weight, muscleGroup, difficulty} = req.body
+
+    let emptyFields = []
+    if(!name) {
+        emptyFields.push('title')
+    }
+    if(!reps) {
+        emptyFields.push('reps')
+    }
+    if(!weight) {
+        emptyFields.push('weight')
+    }
+    if(!muscleGroup) {
+        emptyFields.push('muscleGroup')
+    }
+    if(!difficulty) {
+        emptyFields.push('difficulty')
+    }
+    if(emptyFields.length > 0) {
+        return res.status(400).json ({ error: "Please fill in all fields"})
+
+    }
     try {
         const workout = await Workout.create({name, reps, weight, muscleGroup, difficulty}) // the workout model
         res.status(200).json(workout) 

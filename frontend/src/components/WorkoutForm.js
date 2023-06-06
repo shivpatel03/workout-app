@@ -8,9 +8,9 @@ const WorkoutForm = () => {
     const [muscleGroup,setMuscleGroup] = useState('')
     const [difficulty,setDifficulty] = useState('')
     const [error,setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async(e) => {
-        // e.preventDefault()
 
         const workout = {name, weight, reps, muscleGroup, difficulty}
 
@@ -24,6 +24,7 @@ const WorkoutForm = () => {
         const json = await response.json()
         if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if (response.ok) {
             setName('')
@@ -45,7 +46,7 @@ const WorkoutForm = () => {
                         <label for="workoutName">Workout Name</label>
                         <input 
                             type="text" 
-                            className="form-control" 
+                            className={emptyFields.includes('title') ? 'error form-control' : 'form-control'} 
                             id="workoutName" 
                             aria-describedby="name" 
                             placeholder="Enter workout"
@@ -57,7 +58,7 @@ const WorkoutForm = () => {
                         <label for="weight">Weight (in lbs)</label>
                         <input 
                             type="number" 
-                            className="form-control" 
+                            className={emptyFields.includes('weight') ? 'error form-control' : 'form-control'} 
                             id="number" 
                             aria-describedby="weight" 
                             placeholder="Enter weight"
@@ -69,7 +70,7 @@ const WorkoutForm = () => {
                     <label for="reps">Reps</label>
                         <input 
                             type="number" 
-                            className="form-control" 
+                            className={emptyFields.includes('weight') ? 'error form-control' : 'form-control'} 
                             id="reps" 
                             aria-describedby="reps" 
                             placeholder="Enter reps"
@@ -81,7 +82,7 @@ const WorkoutForm = () => {
                 <div className="row">
                     <div className="col-6">
                         <label for="group">Muscle Group</label>
-                            <select className="form-control" id="group" onChange={(e) => setMuscleGroup(e.target.value)}>
+                            <select className={emptyFields.includes('muscleGroup') ? 'error form-control' : 'form-control'}  id="group" onChange={(e) => setMuscleGroup(e.target.value)}>
                             <option>Chest</option>
                             <option>Back</option>
                             <option>Arms</option>
@@ -91,7 +92,7 @@ const WorkoutForm = () => {
                     </div>
                     <div className="col-6">
                         <label for="diff">Difficulty</label>
-                        <select className="form-control" id="diff" onChange={(e) => setDifficulty(e.target.value)}>
+                        <select className={emptyFields.includes('difficulty') ? 'error form-control' : 'form-control'}  id="diff" onChange={(e) => setDifficulty(e.target.value)}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -106,7 +107,7 @@ const WorkoutForm = () => {
                     </div>
                 </div>
 
-                <button className="btn btn-primary my-3">Add Workout</button>
+                <button className="btn btn-primary my-3 submitFormButton">Add Workout</button>
                 {error && <div className = "lead">{error}</div>}
             
             </div>

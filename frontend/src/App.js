@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // pages and component imports
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
-
 function App() {
   return (
     <div className="App">
