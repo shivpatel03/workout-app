@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Navbar = () => {
     return (
-        <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <nav>
             <a className="h1 nav-header px-4 py-4" href="/">Workout-App</a>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
